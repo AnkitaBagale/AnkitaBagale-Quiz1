@@ -1,0 +1,157 @@
+ var readlineSync= require('readline-sync');
+ var chalk= require('chalk');
+
+//ex13, 14, 15:
+console.log(chalk.greenBright.bgMagenta("  Let's find out how well you know me!!! 🙈  \n"));
+
+var userName= readlineSync.question(chalk.cyanBright("❤️ Please enter your name ❤️\n"));
+
+console.log(chalk.hex('#DEADED')("\nHi "+userName+". Get ready for Level 1. \nEnter a/ b/ c for each question to answer. For each correct answer you will get 2 points."));
+
+//variable declaration for score and question-answers
+var score=0;
+
+var question1={
+  que: "What is my nickname?\na.anku\nb.pinku\nc.notu",
+  ans: "a",
+  description: "Correct answer is a.anku"
+};
+
+var question2={
+  que: "Where do i live? \na.Chennai \nb.Kolkata \nc.Pune ",
+  ans: "c",
+  description:"See you forgot it again. I live in Pune."
+};
+var question3={
+  que: "Where do i work?\na.Tcs \nb.Tech M\nc.Cognizant",
+  ans: "c",
+  description:"Oh no! I work in cognizant"
+};
+var question4={
+  que: "Which food i like the most?\na.Pav Bhaji \nb.Pani puri \nc.Noodles",
+  ans: "a",
+  description:"I love all those items. But PavBhaji wins."
+};
+var question5={
+  que: "Which movie is my favourite one?\na.Dead Silence \nb.Annabelle \nc.Thor: Ragnarok",
+  ans: "c",
+  description:"This one was easy. I hate horror movies. Correct Ans is c.Thor:Ragnarok"
+};
+var question6={
+  que: "Which is my favourite series?\na.Walking Dead \nb.Boys over flowers \nc.Friends",
+  ans: "c",
+  description:"All time favourite. It's Friends"
+};
+var question7={
+  que: "What is my birthdate?\na.11th July \nb.11th Aug \nc.11th May",
+  ans: "b",
+  description:"See you forgot it again. It's 11th Aug."
+};
+var question8={
+  que: "Who is my favourite avenger?\na.Harry Potter \nb.Thor \nc.Captain Marvel",
+  ans: "b",
+  description:"Aww! you were close. I love Thor."
+};
+var question9={
+  que: "Which is my favourite color?\na.Black \nb.Pista \nc.Blue: Ragnarok",
+  ans: "b",
+  description:"I love Pista Pista Pista 🙃"
+};
+var question10={
+  que: "Who is my favourite singer?\na.Eminem \nb.Ed Sheeran \nc.James Arthur",
+  ans: "b",
+  description:"This one was tough. Correct ans is b.Ed Sheeran"
+};
+//saving all questions in array
+var questionSet1=[question1, question2, question3, question4, question5, question6, question7, question8, question9, question10];
+//defining Leaderboard
+var highScore=[
+  {nameH:"Anku", scoreH:"20"},
+  {nameH:"Moti", scoreH:"18"},
+  {nameH:"Athya", scoreH:"16"},
+  {nameH:"Vrush", scoreH:"14"}
+];
+
+//posting qiz and validating answers
+for(let i=0; i<questionSet1.length; i++){
+if(i===3){
+  if(score>=4){
+  console.log("Congratulations! You have entered Level 2 🤩");
+  }
+  else{
+    console.log("Aww! you failed level 1");
+    break;
+  }
+}
+if(i===6){
+  if(score>=8){
+  console.log("Congratulations! You have entered Final Level 🤩. Get ready for the toughest questions.");
+  }
+  else{
+    console.log("Aww! you failed level 2");
+    break;
+  }
+}
+checkScore(i+1,questionSet1[i].que, questionSet1[i].ans, questionSet1[i].description);
+}
+
+
+//posting leaderboard
+ console.log(chalk.keyword('orange').bold("\n*****Check out Leaderboard*****"));
+ printScoreBoard(highScore);
+
+ //compare score with high scores
+var scoreBeaten=false;
+var indexInsert=0;
+for(let i=0; i<highScore.length; i++){
+  if(score>=highScore[i].scoreH){
+    scoreBeaten=true;
+    indexInsert=i;
+    highScore.splice(indexInsert, 0, {nameH:`${userName}`, scoreH:`${score}`});
+    break;
+  }
+}
+console.log('---------------------------------')
+
+//Printin final score
+console.log(chalk.hex('#DEADED').bold("Yay! Your Final Score is "+score));
+//if score is beaten, print leaderboard with username and score
+//positionToInsertInsideLeaderboard var
+var posnInsert =0;
+
+if(scoreBeaten){
+  console.log(chalk.bold.keyword('pink')("Congratulations "+userName+" 🥳 , you are my best friend 😍"));
+  
+  console.log(chalk.keyword('orange').bold("\n*****Leaderboard*****"));
+  printScoreBoard(highScore);
+}
+
+else{
+  console.log(chalk.bold.hex('#DEADED')("Sorry "+userName+", you were so close to be my best friend 🙃"))
+}
+
+
+
+//function to validate answers and update score
+function checkScore(queNo, checkQue, checkAns, description){
+  
+  var userAns= readlineSync.keyIn(chalk.cyanBright("\n"+queNo+") "+checkQue+ "\n"),{limit: '$<a-c>'});
+  if(userAns===checkAns){
+    console.log(chalk.green("You are absolutely right. You get 2 points 🎉"));
+    score+=2;
+  }
+  else{
+    console.log(chalk.redBright(`You are wrong.\n${description}`));
+  }
+  console.log(chalk.yellowBright("Your current score is " +score));
+  console.log('---------------------\n');
+
+}
+
+
+//function to print leaderBoard
+function printScoreBoard(highScore){
+  for(let i=0; i<highScore.length; i++){
+    console.log(chalk.keyword('orange').bold(highScore[i].nameH+" : " +highScore[i].scoreH));
+  }
+}
