@@ -53,7 +53,7 @@ var question8={
   description:"Aww! you were close. I love Thor."
 };
 var question9={
-  que: "Which is my favourite color?\na.Black \nb.Pista \nc.Blue: Ragnarok",
+  que: "Which is my favourite color?\na.Black \nb.Pista \nc.Blue",
   ans: "b",
   description:"I love Pista Pista Pista 🙃"
 };
@@ -72,7 +72,7 @@ var highScore=[
   {nameH:"Vrush", scoreH:"14"}
 ];
 
-//posting qiz and validating answers
+//posting quiz and validating answers
 for(let i=0; i<questionSet1.length; i++){
 if(i===3){
   if(score>=4){
@@ -113,11 +113,9 @@ for(let i=0; i<highScore.length; i++){
 }
 console.log('---------------------------------')
 
-//Printin final score
+//Printing final score
 console.log(chalk.hex('#DEADED').bold("Yay! Your Final Score is "+score));
 //if score is beaten, print leaderboard with username and score
-//positionToInsertInsideLeaderboard var
-var posnInsert =0;
 
 if(scoreBeaten){
   console.log(chalk.bold.keyword('pink')("Congratulations "+userName+" 🥳 , you are my best friend 😍"));
