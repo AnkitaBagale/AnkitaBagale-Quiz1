@@ -1,71 +1,71 @@
- var readlineSync= require('readline-sync');
- var chalk= require('chalk');
+ const readlineSync= require('readline-sync');
+ const chalk= require('chalk');
 
 //ex13, 14, 15:
 console.log(chalk.greenBright.bgMagenta("  Let's find out how well you know me!!! 🙈  \n"));
 
-var userName= readlineSync.question(chalk.cyanBright("❤️ Please enter your name ❤️\n"));
+const userName= readlineSync.question(chalk.cyanBright("❤️ Please enter your name ❤️\n"));
 
 console.log(chalk.hex('#DEADED')("\nHi "+userName+". Get ready for Level 1. \nEnter a/ b/ c for each question to answer. For each correct answer you will get 2 points."));
 
 //variable declaration for score and question-answers
-var score=0;
+let score=0;
 
-var question1={
+const question1={
   que: "What is my nickname?\na.anku\nb.pinku\nc.notu",
   ans: "a",
   description: "Correct answer is a.anku"
 };
 
-var question2={
+const question2={
   que: "Where do i live? \na.Chennai \nb.Kolkata \nc.Pune ",
   ans: "c",
   description:"See you forgot it again. I live in Pune."
 };
-var question3={
+const question3={
   que: "Where do i work?\na.Tcs \nb.Tech M\nc.Cognizant",
   ans: "c",
   description:"Oh no! I work in cognizant"
 };
-var question4={
+const question4={
   que: "Which food i like the most?\na.Pav Bhaji \nb.Pani puri \nc.Noodles",
   ans: "a",
   description:"I love all those items. But PavBhaji wins."
 };
-var question5={
+const question5={
   que: "Which movie is my favourite one?\na.Dead Silence \nb.Annabelle \nc.Thor: Ragnarok",
   ans: "c",
   description:"This one was easy. I hate horror movies. Correct Ans is c.Thor:Ragnarok"
 };
-var question6={
+const question6={
   que: "Which is my favourite series?\na.Walking Dead \nb.Boys over flowers \nc.Friends",
   ans: "c",
   description:"All time favourite. It's Friends"
 };
-var question7={
+const question7={
   que: "What is my birthdate?\na.11th July \nb.11th Aug \nc.11th May",
   ans: "b",
   description:"See you forgot it again. It's 11th Aug."
 };
-var question8={
+const question8={
   que: "Who is my favourite avenger?\na.Harry Potter \nb.Thor \nc.Captain Marvel",
   ans: "b",
   description:"Aww! you were close. I love Thor."
 };
-var question9={
+const question9={
   que: "Which is my favourite color?\na.Black \nb.Pista \nc.Blue",
   ans: "b",
   description:"I love Pista Pista Pista 🙃"
 };
-var question10={
+const question10={
   que: "Who is my favourite singer?\na.Eminem \nb.Ed Sheeran \nc.James Arthur",
   ans: "b",
   description:"This one was tough. Correct ans is b.Ed Sheeran"
 };
 //saving all questions in array
-var questionSet1=[question1, question2, question3, question4, question5, question6, question7, question8, question9, question10];
+const questionSet1=[question1, question2, question3, question4, question5, question6, question7, question8, question9, question10];
 //defining Leaderboard
-var highScore=[
+const highScore=[
   {nameH:"Anku", scoreH:"20"},
   {nameH:"Moti", scoreH:"18"},
   {nameH:"Athya", scoreH:"16"},
@@ -101,8 +101,8 @@ checkScore(i+1,questionSet1[i].que, questionSet1[i].ans, questionSet1[i].descrip
  printScoreBoard(highScore);
 
  //compare score with high scores
-var scoreBeaten=false;
-var indexInsert=0;
+let scoreBeaten=false;
+let indexInsert=0;
 for(let i=0; i<highScore.length; i++){
   if(score>=highScore[i].scoreH){
     scoreBeaten=true;
@@ -133,7 +133,7 @@ else{
 //function to validate answers and update score
 function checkScore(queNo, checkQue, checkAns, description){
   
-  var userAns= readlineSync.keyIn(chalk.cyanBright("\n"+queNo+") "+checkQue+ "\n"),{limit: '$<a-c>'});
+  const userAns= readlineSync.keyIn(chalk.cyanBright("\n"+queNo+") "+checkQue+ "\n"),{limit: '$<a-c>'});
   if(userAns===checkAns){
     console.log(chalk.green("You are absolutely right. You get 2 points 🎉"));
     score+=2;
